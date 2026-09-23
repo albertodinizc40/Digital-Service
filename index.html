@@ -82,7 +82,7 @@ tr.rowlink{cursor:pointer}tr.rowlink:hover td{background:#FAFAF8}
 .attn{display:flex;flex-direction:column;gap:6px;padding:16px 18px}.attn .ttl{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}.attn b{font-size:14px;font-weight:600}.attn .why{font-size:12.5px;color:var(--text)}.attn .cta{font-size:13px;font-weight:600;margin-top:6px}
 .dataline{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;font-size:12.5px;color:var(--muted);padding:10px 14px;background:var(--soft);border-radius:6px;margin-bottom:18px}.dataline b{color:var(--ink);font-weight:500}
 .spark{display:block;width:100%;height:34px}
-.hcard{display:flex;flex-direction:column;min-height:236px}.hcard .viz{margin-top:auto}
+.hcard{display:flex;flex-direction:column;min-height:236px}.hcard .viz{margin-top:auto}.hcard .more{margin-top:auto;padding-top:14px;font-size:13px;font-weight:600;color:var(--green)}
 .side h4{margin:0 0 14px;font-size:15px;display:flex;align-items:center;gap:10px}.side .it{display:flex;gap:10px;margin-top:12px}.side .it b{display:block;font-size:13.5px}.side .it small{color:var(--text);font-size:12.5px}
 /* kpi strip */
 .kpi{display:flex;justify-content:space-between;align-items:flex-start}.kpi .n{font-size:26px;font-weight:700;letter-spacing:-.01em}.kpi .k{font-size:12.5px;color:var(--muted)}
@@ -106,6 +106,7 @@ select.dd{appearance:none;-webkit-appearance:none;background:#fff url("data:imag
 .icard .name{font-size:13.5px;font-weight:600;margin:10px 0 2px}
 .icard .chg{font-size:20px;font-weight:700;letter-spacing:-.01em;white-space:nowrap}
 .icard .ind{font-size:12px;color:var(--muted);line-height:1.35}
+.tspark svg{display:block;width:100%;height:auto}.tspark path{vector-effect:non-scaling-stroke}
 .icard .foot{margin-top:9px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 /* action mini-cards with inline detail */
 .acard{background:#fff;border:1px solid var(--line);border-radius:var(--r);margin-bottom:10px}
@@ -161,28 +162,25 @@ select.dd{appearance:none;-webkit-appearance:none;background:#fff url("data:imag
       <div style="margin-top:10px;font-size:14px;font-weight:600">↓ 1.0% per year at current pace</div>
       <div class="note" style="margin-top:2px">Needs about 8% a year to meet the 2030 milestone</div>
       <div class="viz" id="ov-traj" style="margin-top:12px"></div>
+      <span class="more">View mitigation →</span>
     </div>
     <div class="card clickable hcard" onclick="go('t2')">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px"><div><h3>Climate risks</h3><p class="sub" style="margin-bottom:0">5 hazards assessed · 2027</p></div><span class="pill bad">2 need action</span></div>
       <div style="margin-top:10px;font-size:14px;font-weight:600">2 high-priority hazards</div>
       <div class="note" style="margin-top:2px">Coastal flooding has no action reported yet</div>
       <div class="viz" id="ov-hz" style="margin-top:12px"></div>
+      <span class="more">View adaptation →</span>
     </div>
     <div class="card clickable hcard" onclick="go('t3')">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px"><div><h3>Climate actions</h3><p class="sub" style="margin-bottom:0">12 high-impact actions in the plan</p></div><span class="pill warn">4 to adopt</span></div>
       <div style="margin-top:10px;font-size:14px;font-weight:600">8 of 12 adopted</div>
       <div class="note" style="margin-top:2px">By status · 4 still to adopt by 2030</div>
       <div class="viz" style="margin-top:16px"><div class="stack" style="height:14px" id="ov-stack"></div><div class="legend" id="ov-stack-legend" style="margin-top:10px;gap:10px 16px;flex-wrap:wrap"></div></div>
+      <span class="more">View climate actions →</span>
     </div>
   </div>
 
-  <div class="h2row"><h2>Sector indicators</h2><span class="note" style="margin:0">Direction over the last 5 years · open a sector for the trend</span></div>
-  <div class="g8" id="ov-sectors"></div>
-
-  <div class="h2row"><h2>Needs attention</h2><span class="note" style="margin:0">What to look at first</span></div>
-  <div class="grid g3" id="ov-attn"></div>
-
-  <div class="h2row"><h2>Recommended knowledge</h2><a href="#" onclick="ext('Knowledge Hub');return false">Browse the Knowledge Hub</a></div>
+  <div class="h2row" style="margin-top:36px"><h2>Recommended knowledge</h2><a href="#" onclick="ext('Knowledge Hub');return false">Browse the Knowledge Hub</a></div>
   <div class="grid g3" id="ov-kh"></div>
 
   <div class="bottombar"><button class="btn primary big" onclick="toast('Download the data behind this page as Excel or CSV (simulated)')">Download data</button><button class="btn primary big" onclick="toast('Generate a shareable PDF report of this view (simulated)')">Showcase report</button><button class="btn outline big" onclick="ext('Report')">Update data in Report</button></div>
@@ -225,6 +223,9 @@ select.dd{appearance:none;-webkit-appearance:none;background:#fff url("data:imag
     <div class="note">Reported sectors only. Agriculture, forestry and land use is not reported — it accounted for 2.9 Mt in the 2018 inventory, which is why this total is lower than the city-wide trajectory above. <a href="#" onclick="ext('Report — emissions inventory');return false">Add data in Report</a></div>
   </div>
 
+  <div class="h2row"><h2>Sector indicators</h2><span class="note" style="margin:0">Trend over the last 5 years · average year-on-year change</span></div>
+  <div class="g8" id="mi-ind"></div>
+  <div class="note">Most sector indicators have no stated target in the CAP, so they are shown as a trend and an average year-on-year change. For C40 cities the minimum is a 2% change in the right direction over the last 5 years. Select a sector to see its actions.</div>
   <div class="bottombar"><button class="btn primary big" onclick="toast('Download the data behind this page as Excel or CSV (simulated)')">Download data</button><button class="btn primary big" onclick="toast('Generate a shareable PDF report of this view (simulated)')">Showcase report</button></div>
   <p class="barnote"><b>Download data</b> gives you the underlying figures as Excel or CSV. <b>Showcase report</b> generates a shareable PDF of this view.</p>
 </section>
@@ -237,7 +238,8 @@ select.dd{appearance:none;-webkit-appearance:none;background:#fff url("data:imag
       <div id="rk-hz"></div>
       <div class="note">Priority combines the likelihood and impact the city reported in the questionnaire (low / medium / high). Salvador's assessment is hazard-level: the service ingests the file uploaded through Report and does not map risk by neighbourhood in this release.</div>
     </div>
-    <div class="card" style="display:flex;flex-direction:column">
+    <div style="display:flex;flex-direction:column;gap:18px">
+    <div class="card" style="display:flex;flex-direction:column;flex:1">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><div><h3>Priority risks without an action</h3><p class="sub" style="margin:0">Where adaptation still needs to start</p></div><span class="pill warn">2 pending</span></div>
       <div class="vlist" style="margin-top:14px">
         <div class="row"><span class="vico bad">!</span><div><b>Coastal flooding</b><small>High priority · no action reported</small><a class="cta" style="display:block;margin-top:6px;font-size:13px;font-weight:600" href="#" onclick="go('t3','adaptation');return false">Find related actions →</a></div></div>
@@ -246,6 +248,8 @@ select.dd{appearance:none;-webkit-appearance:none;background:#fff url("data:imag
         <div class="row"><span class="vico ok">✓</span><div><b>Inland flooding · Landslides</b><small>Covered by the early warning system for hillside neighbourhoods</small></div></div>
       </div>
       <div class="note" style="margin-top:auto;padding-top:14px">Need ideas? <a href="#" onclick="ext('Implement — adaptation actions');return false">Browse adaptation actions in Implement</a></div>
+    </div>
+    <div id="ad-ind"></div>
     </div>
   </div>
 
@@ -263,9 +267,10 @@ select.dd{appearance:none;-webkit-appearance:none;background:#fff url("data:imag
 <!-- ================= CLIMATE ACTIONS ================= -->
 <section id="t3" class="screen">
   <!-- #23 target chart first, as a doughnut -->
+  <div class="dataline" style="margin-bottom:14px"><span><b>Preview as</b> · the live service shows the version that matches the city's memberships (review only)</span><span style="margin-left:auto" class="toggle"><button class="on" onclick="setCity('c40',this)">C40</button><button onclick="setCity('other',this)">GCoM</button></span></div>
   <div class="g46">
-    <div class="card">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px"><div><h3>High-impact actions vs 2030 target</h3><p class="sub">C40 commitment</p></div><span class="pill grey">C40 cities only</span></div>
+    <div class="card" id="sum-c40">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px"><div><h3>High-impact actions vs 2030 target</h3><p class="sub">C40 2030 target: 12 high-impact actions</p></div><span class="pill grey">C40 cities only</span></div>
       <div style="display:flex;align-items:center;gap:20px;margin-top:10px;flex-wrap:wrap">
         <div id="ac-donut"></div>
         <div style="flex:1;min-width:145px">
@@ -275,33 +280,32 @@ select.dd{appearance:none;-webkit-appearance:none;background:#fff url("data:imag
           <div class="srow"><span style="display:flex;align-items:center;gap:8px"><i style="width:10px;height:10px;border-radius:2px;background:#DBDDD8"></i>Not yet adopted</span><b>4</b></div>
         </div>
       </div>
-      <div class="note">The coloured ring shows the 8 adopted high-impact actions by status; the light arc is the 4 still to adopt by 2030. GCoM cities have no high-impact action target, so this card does not appear for them. The sector chart alongside counts every action in the plan, which is why the totals differ.</div>
+      <div class="note">8 of 12 adopted, by status. The light arc is the 4 still missing to reach the target.</div>
+    </div>
+    <div class="card" id="sum-other" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap"><div><h3>Actions in the plan</h3><p class="sub">Actions the city has reported</p></div><div class="toggle"><button class="on" onclick="setOther(true,this)">High-impact</button><button onclick="setOther(false,this)">Non-high-impact</button></div></div>
+      <div style="margin-top:14px"><span id="oth-n" style="font-size:40px;font-weight:700;letter-spacing:-.02em">0</span> <span id="oth-l" style="font-size:14px;color:var(--text)"></span></div>
+      <div class="stack" style="height:14px;margin-top:16px" id="oth-bar"></div>
+      <div class="legend" id="oth-leg" style="margin-top:10px"></div>
+      <div class="note">No status breakdown: Achieving / Progressing / Basic is only available for C40 cities.</div>
     </div>
     <div class="card">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap"><div><h3>Actions by sector, status and scale</h3><p class="sub">All C40 sectors · what the city is implementing and where the effort is concentrated</p></div><div class="toggle"><button class="on" onclick="setScope(true,this)">High-impact actions</button><button onclick="setScope(false,this)">All actions</button></div></div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap"><div><h3 id="sum-title">Actions by sector, status and scale</h3><p class="sub">All C40 sectors · what the city is implementing and where the effort is concentrated</p></div><div class="toggle"><button class="on" onclick="setScope(true,this)">High-impact actions</button><button onclick="setScope(false,this)">All actions</button></div></div>
       <div id="ac-summary"></div>
-      <div class="legend"><span><i style="background:var(--ok)"></i>Achieving</span><span><i style="background:var(--amber)"></i>Progressing</span><span><i style="background:#9CA3AF"></i>Basic / not started</span><span style="margin-left:auto">Scale: city-wide · district · sector</span></div>
+      <div class="legend" id="sum-leg"><span><i style="background:var(--ok)"></i>Achieving</span><span><i style="background:var(--amber)"></i>Progressing</span><span><i style="background:#9CA3AF"></i>Basic / not started</span><span style="margin-left:auto">Scale: city-wide · district · sector</span></div>
       <div class="note" id="ac-focus"></div>
     </div>
   </div>
 
-  <div class="h2row"><h2>Needs attention</h2><span class="note" style="margin:0">A quick way to find what is behind, not started or missing</span></div>
-  <div class="grid g4" id="ac-callout"></div>
-
-  <!-- #24 sector cards: average year-on-year change -->
-  <div class="h2row"><h2>Sector indicators over time</h2><span class="note" style="margin:0">Trend over the last 5 years · average year-on-year change</span></div>
-  <div class="g8" id="ac-sectors"></div>
-  <div class="note">Most sector indicators have no stated target in the CAP, so they are shown as a trend and an average year-on-year change. Each indicator has a direction that counts as improvement; for C40 cities the minimum is a 2% change in the right direction over the last 5 years. Select a sector to see it in full.</div>
-
   <!-- #27 sector view with a dropdown -->
-  <div class="h2row" style="margin-top:32px"><h2>Sector view</h2><span><span class="ddl">Sector</span><select class="dd" id="sel-sector" onchange="setSector(this.value)"></select></span></div>
+  <div class="h2row" style="margin-top:32px"><div><h2 style="margin-bottom:2px">Sector view</h2><p class="sub" style="margin:0">Click a sector in the chart above, or use the dropdown on the right, to see its details</p></div><span><span class="ddl">Sector</span><select class="dd" id="sel-sector" onchange="setSector(this.value)"></select></span></div>
   <div id="ac-zoom">
-    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap"><h3 id="ac-title" style="font-size:17px;margin:0">Transport</h3><span class="note" id="ac-lead" style="margin:0"></span></div>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap"><h3 id="ac-title" style="font-size:17px;margin:18px 0 0">Transport</h3><span class="note" id="ac-lead" style="margin:18px 0 0"></span></div>
     <div class="grid g3" id="ac-ind" style="margin-top:14px"></div>
     <div style="margin-top:20px">
       <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:12px">
         <div><h3 style="font-size:16px;margin:0">Actions in this sector</h3><p class="sub" style="margin:2px 0 0">Click an action to open its detail on this page</p></div>
-        <div class="ctrls"><div class="toggle"><button class="on" onclick="setFilter('all',this)">All</button><button onclick="setFilter('attn',this)">Needs attention</button></div><span><span class="ddl">View</span><select class="dd" id="sel-view" onchange="setView(this.value)"><option value="both">Combined · C40 + GCoM</option><option value="c40">C40 only</option><option value="gcom">GCoM only</option></select></span></div>
+        <div class="ctrls"><span><span class="ddl">View</span><select class="dd" id="sel-view" onchange="setView(this.value)"><option value="both">Combined · C40 + GCoM</option><option value="c40">C40 only</option><option value="gcom">GCoM only</option></select></span></div>
       </div>
       <div class="dataline" style="margin-bottom:12px"><span><b>Accelerators and Networks</b> in this sector</span><span id="ac-nets" style="display:flex;flex-wrap:wrap;gap:6px"></span></div>
       <div id="ac-cards"></div>
@@ -372,11 +376,7 @@ function indCard(s,onclick,sel){const m=meetsCh(s.ch,s.dir);
    <div class="name">${s.n}</div>
    <div class="ind">${s.ind}${s.ch===null?'':' · now '+s.v}</div>
    <div class="foot">${thresholdPill(s.ch,s.dir)}${s.ch===null?'<span class="ind"><a href="#" onclick="event.stopPropagation();ext(\'Report — sector indicators\');return false">Add in Report</a></span>':`<span class="ind">improvement = ${s.dir==='up'?'increase ↑':'decrease ↓'}</span>`}</div></div>`;}
-/* Overview = snapshot: direction only; the trend lives in Climate actions */
-function snapStatus(s){if(s.ch===null)return['grey','Not reported','—'];const right=s.dir==='up'?s.ch>0:s.ch<0;const mag=Math.abs(s.ch);
-  if(!right)return['bad','Needs attention','↓'];if(mag>=2)return['ok','Improving','↑'];return['warn','Stable','→'];}
-$('ov-sectors').innerHTML=SECTORS.map(s=>{const [c,l,ar]=snapStatus(s);
-  return `<div class="icard" onclick="go('t3','${s.k}')"><div class="top">${ico(s.i)}<span class="chg c-${c==='grey'?'':c}" style="font-size:18px">${ar}</span></div><div class="name">${s.n}</div><div class="ind">${s.ch===null?'No indicator reported':s.ind}</div><div class="foot"><span class="pill ${c}">${l}</span></div></div>`}).join('');
+
 
 /* Climate actions = evolution: 5-year series per sector indicator */
 const SERIES={energy:[21,25,30,35,39,42],buildings:[0.96,0.95,0.94,0.93,0.91,0.9],transport:[64,65,66,67,67,68],waste:[33,39,45,50,56,61],urban:[47,48,50,51,53,54],adaptation:[23,26,29,32,35,38]};
@@ -385,7 +385,7 @@ function trendCard(s,onclick,sel){const m=meetsCh(s.ch,s.dir);const col=m===null
    <div class="top">${ico(s.i)}<span class="chg ${col}">${s.ch===null?'—':chgTxt(s.ch,s.u)}</span></div>
    <div class="name">${s.n}</div>
    <div class="ind">${s.ind}</div>
-   ${ser?`<div style="margin-top:8px">${spark(ser,m?'#1B7F4C':'#B8860B',150,34)}</div><div class="ind" style="display:flex;justify-content:space-between"><span>2022 · ${ser[0]}${s.u.includes('pts')?'%':''}</span><span>2027 · ${ser[ser.length-1]}${s.u.includes('pts')?'%':''}</span></div>`:`<div class="ind" style="margin-top:8px">No series reported</div>`}
+   ${ser?`<div class="tspark" style="margin-top:8px">${spark(ser,m?'#1B7F4C':'#B8860B',240,34)}</div><div class="ind" style="display:flex;justify-content:space-between"><span>2022 · ${ser[0]}${s.u.includes('pts')?'%':''}</span><span>2027 · ${ser[ser.length-1]}${s.u.includes('pts')?'%':''}</span></div>`:`<div class="ind" style="margin-top:8px">No series reported</div>`}
    <div class="foot">${thresholdPill(s.ch,s.dir)}${s.ch===null?'<span class="ind"><a href="#" onclick="event.stopPropagation();ext(\'Report — sector indicators\');return false">Add in Report</a></span>':''}</div></div>`;}
 
 /* ================= trajectory chart ================= */
@@ -459,7 +459,7 @@ function donut(id,parts,big,small,size){size=size||168;
   s+=`<text x="${cx}" y="${cx-1}" text-anchor="middle" font-size="${Math.round(size*0.22)}" font-weight="700" fill="#111827">${big}</text>`;
   s+=`<text x="${cx}" y="${cx+15}" text-anchor="middle" font-size="10.5" fill="#6B7280">${small}</text></svg>`;
   $(id).innerHTML=s;}
-donut('ac-donut',[{n:'Achieving',v:3,c:'#1B7F4C'},{n:'Progressing',v:3,c:'#B8860B'},{n:'Basic',v:2,c:'#9CA3AF'},{n:'Not yet adopted',v:4,c:'#E9EAE7'}],'8/12','adopted');
+donut('ac-donut',[{n:'Achieving',v:3,c:'#1B7F4C'},{n:'Progressing',v:3,c:'#B8860B'},{n:'Basic',v:2,c:'#9CA3AF'},{n:'Not yet adopted',v:4,c:'#E9EAE7'}],'4','missing to target');
 
 /* ================= hazards ================= */
 const HZ=[{k:'coastal',n:'Coastal flooding',v:.9,l:'High',c:'bad',lk:'High',im:'High'},{k:'heat',n:'Extreme heat',v:.85,l:'High',c:'bad',lk:'High',im:'High'},{k:'inland',n:'Inland flooding',v:.55,l:'Moderate',c:'warn',lk:'Medium',im:'Medium'},{k:'drought',n:'Drought',v:.5,l:'Moderate',c:'warn',lk:'Medium',im:'Medium'},{k:'landslide',n:'Landslides',v:.3,l:'Low',c:'ok',lk:'Low',im:'Medium'}];
@@ -549,8 +549,15 @@ const A=[
 const STC={Achieving:'ok',Progressing:'warn',Basic:'grey'};
 const SCALES=['City-wide','District','Sector'];
 /* #28 — the view follows the city's memberships; "both" is the combined view */
-let HIAONLY=true,SEL='transport',VIEW='both',FILTER='all';
-function setFilter(v,b){FILTER=v;b.parentElement.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));setSector(SEL);}
+let HIAONLY=true,SEL='transport',VIEW='both',CITY='c40',OTH=true;
+function setCity(v,b){CITY=v;b.parentElement.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
+  $('sum-c40').style.display=v==='c40'?'':'none';$('sum-other').style.display=v==='c40'?'none':'';
+  $('sum-leg').style.display=v==='c40'?'':'none';$('sum-title').textContent=v==='c40'?'Actions by sector, status and scale':'Actions by sector and scale';drawSummary();drawOther();}
+function setOther(v,b){OTH=v;b.parentElement.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));drawOther();}
+function drawOther(){const hi=A.filter(a=>a.hia).length,no=A.length-hi,sel=OTH?hi:no;
+  $('oth-n').textContent=sel;$('oth-l').textContent=(OTH?'high-impact':'non-high-impact')+' actions of '+A.length+' reported';
+  $('oth-bar').innerHTML=`<i style="width:${hi/A.length*100}%;background:${OTH?'var(--green)':'#DBDDD8'}"></i><i style="width:${no/A.length*100}%;background:${OTH?'#DBDDD8':'var(--green)'}"></i>`;
+  $('oth-leg').innerHTML=`<span><i style="background:${OTH?'var(--green)':'#DBDDD8'}"></i>High-impact <b style="color:var(--ink)">${hi}</b></span><span><i style="background:${OTH?'#DBDDD8':'var(--green)'}"></i>Non-high-impact <b style="color:var(--ink)">${no}</b></span>`;}
 const pool=()=>A.filter(a=>!HIAONLY||a.hia);
 const finC=a=>a.fin.startsWith('Secured')?'ok':a.fin.startsWith('Not secured')?'bad':'grey';
 const finShort=a=>a.fin.split(' ·')[0].split(' (')[0];
@@ -560,20 +567,11 @@ function drawSummary(){const P=pool();
   $('ac-summary').innerHTML=SECTORS.map(sc=>{const as=P.filter(a=>a.s===sc.k),n=as.length;
    const cnt=st=>as.filter(a=>a.st===st).length, scl=x=>as.filter(a=>a.scale===x).length;
    if(!n)return `<div class="hrow" style="grid-template-columns:120px 1fr 24px 180px;color:var(--muted)"><span>${sc.n}</span><div class="stack"></div><span class="v">0</span><span style="font-size:12px"><a href="#" onclick="ext('Report — climate actions');return false">No actions reported</a></span></div>`;
-   return `<div class="hrow link" style="grid-template-columns:120px 1fr 24px 180px" onclick="setSector('${sc.k}')"><span class="lbl">${sc.n}</span><div class="stack">${[['Achieving','var(--ok)'],['Progressing','var(--amber)'],['Basic','#9CA3AF']].map(([st,c])=>`<i style="width:${cnt(st)/mx*100}%;background:${c}" title="${st}: ${cnt(st)}"></i>`).join('')}</div><span class="v">${n}</span><span class="chips">${SCALES.filter(x=>scl(x)).map(x=>`<span>${x} ${scl(x)}</span>`).join('')}</span></div>`}).join('');
+   return `<div class="hrow link" style="grid-template-columns:120px 1fr 24px 180px" onclick="setSector('${sc.k}')"><span class="lbl">${sc.n}</span><div class="stack">${CITY==='other'?`<i style="width:${n/mx*100}%;background:#7FB3A8"></i>`:[['Achieving','var(--ok)'],['Progressing','var(--amber)'],['Basic','#9CA3AF']].map(([st,c])=>`<i style="width:${cnt(st)/mx*100}%;background:${c}" title="${st}: ${cnt(st)}"></i>`).join('')}</div><span class="v">${n}</span><span class="chips">${SCALES.filter(x=>scl(x)).map(x=>`<span>${x} ${scl(x)}</span>`).join('')}</span></div>`}).join('');
   $('ac-focus').innerHTML=`Highest-emitting sectors: stationary energy (42%) has ${P.filter(a=>a.s==='energy'||a.s==='buildings').length} actions, transport (31%) has ${P.filter(a=>a.s==='transport').length}. ${HIAONLY?'Showing high-impact actions only — use the toggle to include every action, project and shift.':'Showing all '+P.length+' actions, including those that are not high-impact.'}`;}
-function setScope(v,b){HIAONLY=v;b.parentElement.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));drawSummary();drawCallout();setSector(SEL);}
+function setScope(v,b){HIAONLY=v;b.parentElement.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));drawSummary();setSector(SEL);}
 function setView(v){VIEW=v;if($('sel-view'))$('sel-view').value=v;setSector(SEL);}
 
-/* #34 — the callout sits at page level, not inside a sector */
-function drawCallout(){const P=pool();const basic=P.filter(a=>a.st==='Basic'),unfunded=P.filter(a=>a.fin.startsWith('Not secured')),noact=SECTORS.filter(sc=>!P.some(a=>a.s===sc.k)),noind=SECTORS.filter(sc=>sc.ch===null);
-  const item=(cls,n,t,why,cta,go_)=>`<div class="side ${cls} attn"><div class="ttl"><b>${n}</b></div><div class="why"><b style="font-weight:500;color:var(--ink)">${t}</b> · ${why}</div><a class="cta" href="#" onclick="${go_};return false">${cta}</a></div>`;
-  $('ac-callout').innerHTML=[
-    item('warn',basic.length,'actions at a basic stage','not yet under implementation','Show them →',"setFilter('attn',document.querySelectorAll('#ac-zoom .toggle button')[1]);document.getElementById('ac-cards').scrollIntoView({behavior:'smooth'})"),
-    item('bad',unfunded.length,'actions without secured finance','funding not yet secured','Show them →',"setFilter('attn',document.querySelectorAll('#ac-zoom .toggle button')[1]);document.getElementById('ac-cards').scrollIntoView({behavior:'smooth'})"),
-    item('bad','2','priority risks without an action','coastal flooding and drought','View adaptation →',"go('t2')"),
-    item('grey',noact.length+noind.length,'reporting gaps',(noact.map(s=>s.n+' has no actions').concat(noind.map(s=>s.n+' has no indicator'))).join(' · '),'Add in Report →',"ext('Report')")
-  ].join('');}
 /* ---- #28 / #29 / #31 / #32 action mini-cards that expand in place ---- */
 function metaFields(a){const f=[];
   if(VIEW!=='gcom'){f.push(['Status',`<span class="pill ${STC[a.st]}">${a.st}</span>`]);
@@ -624,18 +622,19 @@ function toggleAction(code){const el=$('ac-'+code);if(!el)return;
 function setSector(k){k=SMAP[k]||k;if(!SN[k])k='transport';SEL=k;
   const as=pool().filter(a=>a.s===k),meta=SECTORS.find(s=>s.k===k);
   if($('sel-sector'))$('sel-sector').value=k;
-  $('ac-sectors').innerHTML=SECTORS.map(s=>trendCard(s,`setSector('${s.k}')`,s.k===k)).join('');
   $('ac-title').textContent=meta.n+(k==='adaptation'?' — includes nature, water and heat':'');
   $('ac-lead').textContent=as.length?`${as.length} actions · ${as.filter(a=>a.st==='Achieving').length} achieving · ${as.filter(a=>a.st==='Progressing').length} progressing · ${as.filter(a=>a.st==='Basic').length} basic`:'No actions reported in this sector';
   const inds=IND[k]||[];
   $('ac-ind').innerHTML=inds.length?inds.map(i=>{const m=meetsCh(i.ch,i.dir);
      return `<div class="card" style="padding:16px 18px"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px"><span style="font-size:13.5px;font-weight:500">${i.l}</span><span style="font-size:20px;font-weight:700" class="${m?'c-ok':'c-warn'}">${chgTxt(i.ch,i.u)}</span></div><div class="note" style="margin-top:8px">Now ${i.v}${i.t?' · target '+i.t:' · no target in the CAP'}</div><div style="margin-top:8px">${thresholdPill(i.ch,i.dir)}</div></div>`}).join('')
     :`<div class="card" style="grid-column:1/-1"><p class="sub" style="margin:0">No sector indicators reported for ${meta.n}. <a href="#" onclick="ext('Report — sector indicators');return false">Add them in Report</a></p></div>`;
-  const shown=FILTER==='attn'?as.filter(a=>a.st==='Basic'||a.fin.startsWith('Not secured')):as;
-  $('ac-cards').innerHTML=shown.length?shown.map(actionCard).join(''):FILTER==='attn'?`<div class="card"><p class="sub" style="margin:0">Nothing needs attention in ${meta.n} — all actions are under way and funded.</p></div>`:`<div class="card"><p class="sub" style="margin:0">Salvador has not reported any ${HIAONLY?'high-impact ':''}action in ${meta.n}. <a href="#" onclick="ext('Report — climate actions');return false">Add an action in Report</a></p></div>`;
+  const shown=as;
+  $('ac-cards').innerHTML=shown.length?shown.map(actionCard).join(''):`<div class="card"><p class="sub" style="margin:0">Salvador has not reported any ${HIAONLY?'high-impact ':''}action in ${meta.n}. <a href="#" onclick="ext('Report — climate actions');return false">Add an action in Report</a></p></div>`;
   $('ac-nets').innerHTML=(NETS[k]||[]).map(n=>`<span class="pill" style="background:var(--green-lt);color:var(--green)">${n}</span>`).join('')||'<span>None in this sector</span>';}
 $('sel-sector').innerHTML=SECTORS.map(s=>`<option value="${s.k}">${s.n}</option>`).join('');
-drawSummary(); drawCallout(); setSector('transport');
+$('mi-ind').innerHTML=SECTORS.filter(s=>s.k!=='adaptation').map(s=>trendCard(s,`go('t3','${s.k}')`,false)).join('');
+$('ad-ind').innerHTML=SECTORS.filter(s=>s.k==='adaptation').map(s=>trendCard(s,`go('t3','adaptation')`,false)).join('');
+drawSummary(); drawOther(); setSector('transport');
 
 /* ================= routing ================= */
 const H1={t0:'How Salvador is doing',t1:'How Salvador is doing on emissions',t2:'Climate risk in Salvador',t3:'How Salvador is doing on climate actions',t5:'Salvador’s GCoM badge status'};
@@ -650,14 +649,7 @@ function ext(n){toast('Would open '+n+' — outside this wireframe');}
 
 /* ================= overview: needs attention + recommended knowledge ================= */
 (function(){const item=(cls,t,why,cta,go_)=>`<div class="side ${cls} attn"><div class="ttl"><b>${t}</b></div><div class="why">${why}</div><a class="cta" href="#" onclick="${go_};return false">${cta}</a></div>`;
-  $('ov-attn').innerHTML=[
-    item('bad','Coastal flooding','High priority · no adaptation action reported','View adaptation →',"go('t2')"),
-    item('warn','Transport emissions','↓ only 4% since 2018 · the slowest-falling sector, 31% of emissions','View mitigation →',"go('t1')"),
-    item('warn','4 high-impact actions','Not yet adopted · C40 2030 target','View actions →',"go('t3')"),
-    item('warn','Buildings','Below the 2% improvement threshold · emissions per capita','View sector →',"go('t3','buildings')"),
-    item('grey','Food · Air quality','No sector indicator reported','Add in Report →',"ext('Report — sector indicators')"),
-    item('grey','Land-use emissions','Not in the inventory · SEEG proxy data available','Add in Report →',"ext('Report — emissions inventory')")
-  ].join('');
+  
   const kh=(k,sec,t,d)=>`<div class="card next"><div class="eyebrow">${ico(k)}KNOWLEDGE HUB · ${sec}</div><h4>${t}</h4><p>${d}</p><button class="btn soft" onclick="ext('Knowledge Hub — ${t}')">Read article</button></div>`;
   $('ov-kh').innerHTML=[kh('transport','TRANSPORT','Electric bus procurement toolkit','Financial models and technical specifications for municipal fleet upgrades.'),kh('adapt','ADAPTATION','Coastal flood risk: from assessment to action','How cities set adaptation goals and choose first interventions.'),kh('buildings','BUILDINGS','Retrofit policies for municipal buildings','Policy options behind the new national guidelines.')].join('');
 })();
